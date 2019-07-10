@@ -1,0 +1,50 @@
+$prim-color: #333333;
+$sec-color: #dddddd;
+$box-color: rgb(248, 133, 56);
+
+.navbar {
+    background: $prim-color;
+    padding: 1em;
+    a {
+        all: unset;
+        color: $sec-color;
+        padding: 1em;
+        translate: 0.5s;
+    }
+    a:hover {
+        color: $prim-color;
+        background: $sec-color;
+    }
+}
+
+.cursesPage {
+    padding: 1vw;
+    h1 {
+        padding: 1vw;
+    }
+    .p-accordion-content {
+        padding: 0px !important;
+        .curses {
+            display: grid;
+            grid-gap: 1vw;
+            grid-template-columns: repeat(4, 1fr);
+            background: $sec-color;
+            padding: 1vw;
+            .smallCurs {
+                h2 {
+                    font-weight: bold;
+                }
+                p {
+                    text-align: justify;
+                }
+                a {
+                    font-weight: bolder;
+                    background: $prim-color;
+                    color: $sec-color;
+                    padding: 5px;
+                    border-radius: 10px;
+                }
+            }
+        }
+    }
+}

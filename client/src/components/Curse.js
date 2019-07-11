@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import data from '../data/data.json';
 import Hamburger from './Hamburger';
 import Lesson from './Lesson';
+import Test from './Test';
 import { Route, NavLink, HashRouter } from "react-router-dom";
 
 class Curse extends Component {
@@ -24,15 +25,13 @@ class Curse extends Component {
       <div className="curse">
         <Hamburger data={this.state.data.lessongroups} curseId={this.props.id} />
         <div className="content">
-        <Route path="/curse/:curseId/lesson/:lessonId" component={({ match, location }) => {
+          <Route path="/curse/:curseId/lesson/:lessonId" component={({ match, location }) => {
             const { params: { curseId, lessonId } } = match;
-            console.log('routing to lesson ' + lessonId + ' in curse ' + curseId);
             return (<Lesson curseId={curseId} lessonId={lessonId} />);
           }} />
-          <Route path="/curse/:curseId/group/:groupId/lesson/:lessonId" component={({ match, location }) => {
-            const { params: { curseId, groupId, lessonId } } = match;
-            console.log('routing to lesson ' + lessonId + ' in curse ' + curseId);
-            return (<Lesson curseId={curseId} lessonId={lessonId} groupId={groupId}/>);
+          <Route path="/curse/:curseId/group/:groupId/test" component={({ match, location }) => {
+            const { params: { curseId, groupId } } = match;
+            return (<Test curseId={curseId} groupId={groupId} />);
           }} />
         </div>
       </div>

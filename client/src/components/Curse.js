@@ -25,9 +25,9 @@ class Curse extends Component {
       <div className="curse">
         <Hamburger data={this.state.data.lessongroups} curseId={this.props.id} />
         <div className="content">
-          <Route path="/curse/:curseId/lesson/:lessonId" component={({ match, location }) => {
-            const { params: { curseId, lessonId } } = match;
-            return (<Lesson curseId={curseId} lessonId={lessonId} />);
+          <Route path="/curse/:curseId/group/:groupId/lesson/:lessonId" component={({ match, location }) => {
+            const { params: { curseId, groupId, lessonId } } = match;
+            return (<Lesson curseId={curseId} groupId={groupId} lessonId={lessonId} />);
           }} />
           <Route path="/curse/:curseId/group/:groupId/test" component={({ match, location }) => {
             const { params: { curseId, groupId } } = match;

@@ -21,10 +21,8 @@ class Hamburger extends Component {
     }
     renderRedirect() {
         if (this.state.redirect) {
-            return <Redirect to={'/curse/' + this.props.curseId + '/group/' + this.state.groupId + (this.state.test ? '/test' : '/lesson/' + this.state.lessonId)} />
+            return <Redirect exact strict to={'/curse/' + this.props.curseId + '/group/' + this.state.groupId + (this.state.test ? '/test' : '/lesson/' + this.state.lessonId)} />
         }
-    }
-    componentDidMount() {
     }
 
     render() {

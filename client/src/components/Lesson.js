@@ -6,6 +6,19 @@ import { Redirect } from 'react-router-dom'
 class Lesson extends Component {
 
     state = {
+        redirect: false
+    }
+
+    setRedirect() {
+        this.setState({
+            redirect: true
+        })
+    }
+
+    renderRedirect() {
+        if (this.state.redirect) {
+            return <Redirect to={'/curse/' + this.props.curseId + '/group/' + this.props.groupId + '/lesson/' + this.props.lessonId + '/test'} />
+        }
     }
 
     componentDidMount() {
@@ -18,7 +31,7 @@ class Lesson extends Component {
                 let lesson = res.find(e => e.id === curseId)
                     .lessongroups.find(g => g.id === groupId)
                     .lessons.find(l => l.id === lessonId);
-                this.setState({ data: lesson });
+                this.setState({ data: lesson, redirect: false });
             })
             .catch(e => console.log(e));
     }
@@ -26,9 +39,10 @@ class Lesson extends Component {
     render() {
         return this.state.data ? (
             <div className="lesson">
+                {this.renderRedirect()}
                 <h1>{this.state.data.title}</h1>
                 <div className="lesson-content">{this.state.data.content}</div>
-                <Button label="Test yourself" />
+                <Button label="Test yourself" onClick={()=>this.setRedirect()} />
             </div>
         ) : <div />;
     }

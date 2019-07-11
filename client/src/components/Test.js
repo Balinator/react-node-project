@@ -15,9 +15,15 @@ class Test extends Component {
                 let curseId = Number.parseInt(this.props.curseId);
                 let groupId = Number.parseInt(this.props.groupId);
 
-                let test = res.find(e => e.id === curseId)
-                    .lessongroups.find(g => g.id === groupId).test;
-                this.setState({ data: test });
+                let testSource = res.find(c => c.id === curseId)
+                    .lessongroups.find(g => g.id === groupId);
+
+                if (this.props.lessonId) {
+                    let lessonId = Number.parseInt(this.props.lessonId);
+                    testSource = testSource.lessons.find(l => l.id === lessonId);
+                }
+
+                this.setState({ data: testSource.test });
             })
             .catch(e => console.log(e));
     }

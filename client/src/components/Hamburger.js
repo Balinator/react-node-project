@@ -10,16 +10,17 @@ class Hamburger extends Component {
         test: false,
         id: null
     }
-    setRedirect(id, test) {
+    setRedirect(lessonId, groupId, test) {
         this.setState({
             redirect: true,
             test: test,
-            id: id
+            groupId: groupId,
+            lessonId: lessonId
         })
     }
     renderRedirect() {
         if (this.state.redirect) {
-            return <Redirect to={'/curse/' + this.props.curseId + (this.state.test ? '/groupTest/' : '/lesson/') + this.state.id} />
+            return <Redirect to={'/curse/' + this.props.curseId + '/group/' + this.state.groupId + (this.state.test ? '/test' : '/lesson/' + this.state.lessonId)} />
         }
     }
     componentDidMount() {
@@ -45,10 +46,10 @@ class Hamburger extends Component {
                     <AccordionTab key={++key} header={lessonGroup.name}>
                         <p>{lessonGroup.description}</p>
                         <div>
-                            {this.generateLessons(lessonGroup.lessons)}
+                            {this.generateLessons(lessonGroup.lessons, lessonGroup.id)}
                         </div>
                         {lessonGroup.test !== null ?
-                            <div><Button label={lessonGroup.test.title} onClick={() => this.setRedirect(lessonGroup.test.id, true)}></Button></div> : <div />
+                            <div><Button label={lessonGroup.test.title} onClick={() => this.setRedirect(lessonGroup.id, lessonGroup.id, true)}></Button></div> : <div />
                         }
                     </AccordionTab>
                 );
@@ -57,12 +58,12 @@ class Hamburger extends Component {
         return accordionTabs;
     }
 
-    generateLessons(lessons) {
+    generateLessons(lessons, groupId) {
         let accordionTabs = [];
         let key = 0;
         lessons.forEach(lesson => {
             accordionTabs.push(
-                <Button key={++key} label={lesson.title} onClick={() => this.setRedirect(lesson.id, false)} />
+                <Button key={++key} label={lesson.title} onClick={() => this.setRedirect(lesson.id, groupId, false)} />
             );
         });
         return accordionTabs;

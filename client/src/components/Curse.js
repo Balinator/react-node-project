@@ -29,10 +29,10 @@ class Curse extends Component {
             console.log('routing to lesson ' + lessonId + ' in curse ' + curseId);
             return (<Lesson curseId={curseId} lessonId={lessonId} />);
           }} />
-          <Route path="/curse/:curseId/groupTest/:testId" component={({ match, location }) => {
-            const { params: { curseId, lessonId } } = match;
+          <Route path="/curse/:curseId/group/:groupId/lesson/:lessonId" component={({ match, location }) => {
+            const { params: { curseId, groupId, lessonId } } = match;
             console.log('routing to lesson ' + lessonId + ' in curse ' + curseId);
-            return (<Lesson curseId={curseId} lessonId={lessonId} />);
+            return (<Lesson curseId={curseId} lessonId={lessonId} groupId={groupId}/>);
           }} />
         </div>
       </div>

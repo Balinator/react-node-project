@@ -13,15 +13,12 @@ class Lesson extends Component {
         Promise.resolve(data)
             .then(res => {
                 let curseId = Number.parseInt(this.props.curseId);
-                let curse = res.find(e => e.id === curseId);
+                let groupId = Number.parseInt(this.props.groupId);
                 let lessonId = Number.parseInt(this.props.lessonId);
-                let lesson = null;
-                curse.lessongroups.forEach(grups => {
-                    if (lesson) {
-                        return;
-                    }
-                    lesson = grups.lessons.find(l => l.id === lessonId);
-                });
+
+                let lesson = res.find(e => e.id === curseId)
+                    .lessongroups.find(g => g.id === groupId)
+                    .lessons.find(l => l.id === lessonId);
                 this.setState({ data: lesson });
             })
             .catch(e => console.log(e));
@@ -33,7 +30,7 @@ class Lesson extends Component {
                 <div className="lesson">
                     <h1>{this.state.data.title}</h1>
                     <div className="lesson-content">{this.state.data.content}</div>
-                    <Button label="Test yourself"/>
+                    <Button label="Test yourself" />
                 </div>
             </ScrollPanel>
         ) : <div />;

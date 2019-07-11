@@ -3,7 +3,8 @@ import data from '../data/data.json';
 import Hamburger from './Hamburger';
 import Lesson from './Lesson';
 import Test from './Test';
-import { Route, NavLink, HashRouter } from "react-router-dom";
+import { Route } from "react-router-dom";
+import { ScrollPanel } from 'primereact/scrollpanel';
 
 class Curse extends Component {
 
@@ -25,14 +26,16 @@ class Curse extends Component {
       <div className="curse">
         <Hamburger data={this.state.data.lessongroups} curseId={this.props.id} />
         <div className="content">
-          <Route path="/curse/:curseId/group/:groupId/lesson/:lessonId" component={({ match, location }) => {
-            const { params: { curseId, groupId, lessonId } } = match;
-            return (<Lesson curseId={curseId} groupId={groupId} lessonId={lessonId} />);
-          }} />
-          <Route path="/curse/:curseId/group/:groupId/test" component={({ match, location }) => {
-            const { params: { curseId, groupId } } = match;
-            return (<Test curseId={curseId} groupId={groupId} />);
-          }} />
+          <ScrollPanel className="scroll">
+            <Route path="/curse/:curseId/group/:groupId/lesson/:lessonId" component={({ match, location }) => {
+              const { params: { curseId, groupId, lessonId } } = match;
+              return (<Lesson curseId={curseId} groupId={groupId} lessonId={lessonId} />);
+            }} />
+            <Route path="/curse/:curseId/group/:groupId/test" component={({ match, location }) => {
+              const { params: { curseId, groupId } } = match;
+              return (<Test curseId={curseId} groupId={groupId} />);
+            }} />
+          </ScrollPanel>
         </div>
       </div>
     ) : <div />;

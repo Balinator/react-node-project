@@ -65,44 +65,51 @@ $box-color: rgb(248, 133, 56);
     grid-template-columns: 10vw 90vw;
     .hamburger {
         background: #333333;
-        .p-accordion-tab {
-            margin: 0px;
-            .p-accordion-header:not(.p-disabled) a:focus {
-                box-shadow: 0 0 0 0 #8dcdff00;
-            }
-            .p-accordion-header {
-                padding: 0px;
-                margin-top: 0px;
-                a {
-                    border-radius: 0px;
-                }
-            }
-            .p-accordion-content{
-                border: 0px;
-                padding: 0px;
-                margin: 0px;
-                p {
+        width: calc(10vw);
+        .scroll {
+            height: 100%;
+            .p-accordion {
+                margin-bottom: 10vh;
+                .p-accordion-tab {
                     margin: 0px;
-                    padding: 1em;
-                    background: $prim-color;
-                    color: $sec-color;
-                    text-align: justify;
-                }
-                button {
-                    all: unset;
-                    background: $prim-color;
-                    color: $sec-color;
-                    width: 100%;
-                }
-                button:hover {
-                    background: $sec-color;
-                    color: $prim-color;
+                    .p-accordion-header:not(.p-disabled) a:focus {
+                        box-shadow: 0 0 0 0 #8dcdff00;
+                    }
+                    .p-accordion-header {
+                        padding: 0px;
+                        margin-top: 0px;
+                        a {
+                            border-radius: 0px;
+                        }
+                    }
+                    .p-accordion-content{
+                        border: 0px;
+                        padding: 0px;
+                        margin: 0px;
+                        p {
+                            margin: 0px;
+                            padding: 1em;
+                            background: $prim-color;
+                            color: $sec-color;
+                            text-align: justify;
+                        }
+                        button {
+                            all: unset;
+                            background: $prim-color;
+                            color: $sec-color;
+                            width: 100%;
+                        }
+                        button:hover {
+                            background: $sec-color;
+                            color: $prim-color;
+                        }
+                    }
                 }
             }
         }
     }
     .content {
-        width: calc(90vw - 10px);
+        width: calc(90vw);
         .scroll {
             height: calc(100vh - 3em - 10px);
             .lesson {

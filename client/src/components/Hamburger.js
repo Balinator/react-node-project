@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import { Button } from 'primereact/button';
 import { Redirect } from 'react-router-dom'
+import { ScrollPanel } from 'primereact/scrollpanel';
 
 class Hamburger extends Component {
 
@@ -30,9 +31,11 @@ class Hamburger extends Component {
         return (
             <div className="hamburger">
                 {this.renderRedirect()}
-                <Accordion multiple={true}>
-                    {this.generateAccordions()}
-                </Accordion>
+                <ScrollPanel className="scroll">
+                    <Accordion multiple={true}>
+                        {this.generateAccordions()}
+                    </Accordion>
+                </ScrollPanel>
             </div>
         );
     }

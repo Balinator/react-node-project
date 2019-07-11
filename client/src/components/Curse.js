@@ -1,35 +1,42 @@
 import React, { Component } from "react";
-import { Card } from 'primereact/card';
-import data from '../data.json';
+import data from '../data/data.json';
+import Hamburger from './Hamburger';
+import Lesson from './Lesson';
+import { Route, NavLink, HashRouter } from "react-router-dom";
 
 class Curse extends Component {
 
   state = {
-    data: {
-      name: ""
-    }
   }
 
   componentDidMount() {
     Promise.resolve(data)
       .then(res => {
-        console.log(this.props.id);
-        console.log(res);
-        let curse = res.find(e=>e.id == this.props.id);
-        console.log(curse);
-        this.setState({ data: curse});
+        let id = Number.parseInt(this.props.id);
+        let curse = res.find(e => e.id === id);
+        this.setState({ data: curse });
       })
       .catch(e => console.log(e));
   }
 
   render() {
-    return (
+    return this.state.data ? (
       <div className="curse">
-        <Card title={this.state.data.name}>
-          <p>{JSON.stringify(this.state.data, null, 4)}</p>
-        </Card>
+        <Hamburger data={this.state.data.lessongroups} curseId={this.props.id} />
+        <div className="content">
+        <Route path="/curse/:curseId/lesson/:lessonId" component={({ match, location }) => {
+            const { params: { curseId, lessonId } } = match;
+            console.log('routing to lesson ' + lessonId + ' in curse ' + curseId);
+            return (<Lesson curseId={curseId} lessonId={lessonId} />);
+          }} />
+          <Route path="/curse/:curseId/groupTest/:testId" component={({ match, location }) => {
+            const { params: { curseId, lessonId } } = match;
+            console.log('routing to lesson ' + lessonId + ' in curse ' + curseId);
+            return (<Lesson curseId={curseId} lessonId={lessonId} />);
+          }} />
+        </div>
       </div>
-    );
+    ) : <div />;
   }
 }
 

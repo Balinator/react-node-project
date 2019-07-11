@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import data from '../data.json';
+import data from '../data/data.json';
 import CurseSmall from './CurseSmall';
 import '../css/style.scss';
 import {Accordion,AccordionTab} from 'primereact/accordion';

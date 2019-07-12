@@ -1,50 +1,36 @@
 import Koa from "koa";
 import cors from "koa-cors";
-import compress from "koa-compress";
-import json from "koa-json";
 import serve from "koa-static";
 import logger from "koa-logger";
-import convert from "koa-convert";
-import respond from "koa-respond";
 import bodyParser from "koa-bodyparser";
-import send from "koa-send";
-import path from "path";
 
-import index from "./router/index";
+import mount from "koa-mount";
+
+import Router from"koa-router";
+import HttpStatus from"http-status";
 
 const app = new Koa();
 
-app.use(respond());
+const router = new Router();
 
-app.use(async(ctx, next) => {
-    ctx.send = send;
-    try {
-        ctx.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-        ctx.set("Access-Control-Allow-Origin", "*");
-        ctx.set("X-Powered-By", "create-koa-app");
-        await next();
-    } catch (err) {
-        ctx.internalServerError(err);
-    }
+router.get("/api/data", async (ctx, next) => {
+    ctx.status = HttpStatus.OK;
+    ctx.body = {data:{json:true}};
+    await next();
 });
 
-app.use(compress({
-    threshold: 2048,
-    flush: require("zlib").Z_SYNC_FLUSH
-}));
-
-app.use(convert(logger()));
-
-app.use(convert(cors()));
-
-app.use(convert(json()));
-
+const static_pages = new Koa();
+static_pages.use(serve(__dirname + "/../client/build")); //serve the build directory
+app.use(mount("/", static_pages));
 app.use(bodyParser());
+app.use(logger());
+app.use(cors());
 
-app.use(convert(serve(path.resolve(__dirname, "static"))));
+app.use(router.routes()).use(router.allowedMethods());
+app.use(function *(){
+  this.set('Access-Control-Allow-Origin', '*');
+});
+  
 
-app.use(index.routes());
-
-app.listen(process.env.PORT || 3000);
-
-console.log(`Server up and running! On port ${process.env.PORT || 3000}!`);
+app.listen(3000);
+console.log('Server running in http://localhost:' + (process.env.PORT || 3000))

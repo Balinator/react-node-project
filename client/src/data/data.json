@@ -19,9 +19,31 @@
                             "description": "bla bla bla",
                             "questions": [
                                 {
-                                    "question": "???",
-                                    "type": "textarea"
-                                } 
+                                    "id": 1,
+                                    "question": "Is this null?",
+                                    "type": "textarea",
+                                    "answer": "null"
+                                },
+                                {
+                                    "id": 2,
+                                    "question": "Select one?",
+                                    "type": "radio",
+                                    "answer": "a",
+                                    "answers": [
+                                        {
+                                            "answer": "a"
+                                        },
+                                        {
+                                            "answer": "b"
+                                        },
+                                        {
+                                            "answer": "c"
+                                        },
+                                        {
+                                            "answer": "d"
+                                        }
+                                    ]
+                                }
                             ]
                         }
                     },
@@ -34,14 +56,16 @@
                             "description": "bla bla bla",
                             "questions": [
                                 {
+                                    "id": 3,
                                     "question": "???",
                                     "type": "textarea"
-                                } 
+                                }
                             ]
                         }
                     }
                 ]
-            },{
+            },
+            {
                 "id": 2,
                 "name": "Group 2",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
@@ -50,9 +74,10 @@
                     "description": "bla bla bla",
                     "questions": [
                         {
+                            "id": 4,
                             "question": "???",
                             "type": "textarea"
-                        } 
+                        }
                     ]
                 },
                 "lessons": [
@@ -65,9 +90,10 @@
                             "description": "bla bla bla",
                             "questions": [
                                 {
+                                    "id": 5,
                                     "question": "???",
                                     "type": "textarea"
-                                } 
+                                }
                             ]
                         }
                     },
@@ -80,9 +106,11 @@
                             "description": "bla bla bla",
                             "questions": [
                                 {
+
+                                    "id": 6,
                                     "question": "???",
                                     "type": "textarea"
-                                } 
+                                }
                             ]
                         }
                     }
@@ -111,9 +139,10 @@
                             "description": "bla bla bla",
                             "questions": [
                                 {
+                                    "id": 7,
                                     "question": "???",
                                     "type": "textarea"
-                                } 
+                                }
                             ]
                         }
                     },
@@ -126,27 +155,50 @@
                             "description": "bla bla bla",
                             "questions": [
                                 {
+
+                                    "id": 8,
                                     "question": "???",
                                     "type": "textarea"
-                                } 
+                                }
                             ]
                         }
                     }
                 ]
-            },{
-
+            },
+            {
                 "id": 4,
                 "name": "Group 2",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                 "test": {
-                    "id": 8,
                     "title": "Group Test 2",
                     "description": "bla bla bla",
                     "questions": [
                         {
-                            "question": "???",
-                            "type": "textarea"
-                        } 
+                            "id": 9,
+                            "question": "Is this null?",
+                            "type": "textarea",
+                            "answer": "null"
+                        },
+                        {
+                            "id": 10,
+                            "question": "Select one?",
+                            "type": "radio",
+                            "answer": "a",
+                            "answers": [
+                                {
+                                    "answer": "a"
+                                },
+                                {
+                                    "answer": "b"
+                                },
+                                {
+                                    "answer": "c"
+                                },
+                                {
+                                    "answer": "d"
+                                }
+                            ]
+                        }
                     ]
                 },
                 "lessons": [
@@ -159,9 +211,10 @@
                             "description": "bla bla bla",
                             "questions": [
                                 {
+                                    "id": 11,
                                     "question": "???",
                                     "type": "textarea"
-                                } 
+                                }
                             ]
                         }
                     },
@@ -174,9 +227,10 @@
                             "description": "bla bla bla",
                             "questions": [
                                 {
+                                    "id": 12,
                                     "question": "???",
                                     "type": "textarea"
-                                } 
+                                }
                             ]
                         }
                     }

@@ -10,6 +10,7 @@ class Test extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            redirect: false
         };
 
         this.handleValueChange = this.handleValueChange.bind(this);
@@ -39,6 +40,7 @@ class Test extends Component {
     render() {
         return this.state.data ? (
             <div className="test">
+                {this.renderRedirect()}
                 <div>
                     <h1>{this.state.data.title}</h1>
                     <p>{this.state.data.description}</p>
@@ -51,6 +53,10 @@ class Test extends Component {
         ) : <div />;
     }
 
+    /**
+     * 
+     * @param {*} values 
+     */
     validate(values) {
         let answers = {};
         if (!values) {
@@ -70,12 +76,23 @@ class Test extends Component {
             }
         });
         this.saveTo(answers);
-        
+        this.setRedirect();
     }
 
-    getFileName(){
+    setRedirect() {
+        this.setState({
+            redirect: true
+        });
+    }
+    renderRedirect() {
+        if (this.state.redirect) {
+            return <Redirect exact strict to={'/curse/' + this.props.curseId + '/group/' + this.props.groupId + (this.props.lessonId ? '/lesson/' + this.props.lessonId : '') + '/test/result'} />
+        }
+    }
+
+    getFileName() {
         let name = this.props.curseId + '-' + this.props.groupId;
-        if(this.props.lessonId) {
+        if (this.props.lessonId) {
             name += '-' + this.props.lessonId;
         }
         return name + '-test-results.json';
@@ -113,6 +130,13 @@ class Test extends Component {
         return questions;
     }
 
+    /**
+     * bajskfaslkfjlaks
+     * 
+     * @param {*} question fjsdhfjksdhfjkshd
+     * @param {*} key 
+     * @returns kljdskgljdslkgjsdg
+     */
     keyWrap(question, key) {
         if (key && question) {
             return <div key={key}>{question}</div>;

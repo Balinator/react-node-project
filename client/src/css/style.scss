@@ -1,0 +1,137 @@
+$prim-color: #333333;
+$sec-color: #dddddd;
+$box-color: rgb(248, 133, 56);
+
+.navbar {
+    background: $prim-color;
+    padding: 1em;
+    height: 3em;
+    a {
+        all: unset;
+        color: $sec-color;
+        padding: 1em;
+        translate: 0.5s;
+    }
+    a:hover {
+        color: $prim-color;
+        background: $sec-color;
+    }
+}
+
+.cursesPage {
+    padding: 1vw;
+    h1 {
+        padding: 1vw;
+    }
+    .p-accordion-content {
+        padding: 0px !important;
+        .curses {
+            display: grid;
+            grid-gap: 1vw;
+            grid-template-columns: repeat(4, 1fr);
+            background: $sec-color;
+            padding: 1vw;
+            .smallCurs {
+                .p-card {
+                    height: 100%;
+                    .p-card-body {
+                        height: 100%;
+                        .p-card-footer {
+                            vertical-align: bottom
+                        }
+                    }
+                }
+                h2 {
+                    font-weight: bold;
+                }
+                p {
+                    text-align: justify;
+                }
+                a {
+                    font-weight: bolder;
+                    background: $prim-color;
+                    color: $sec-color;
+                    padding: 5px;
+                    border-radius: 10px;
+                }
+            }
+        }
+    }
+}
+
+.curse {
+    display: grid;
+    grid-template-rows: calc(100vh - 3em);
+    grid-template-columns: 10vw 90vw;
+    .hamburger {
+        background: #333333;
+        width: calc(10vw);
+        .scroll {
+            height: 100%;
+            .p-accordion {
+                margin-bottom: 10vh;
+                .p-accordion-tab {
+                    margin: 0px;
+                    .p-accordion-header:not(.p-disabled) a:focus {
+                        box-shadow: 0 0 0 0 #8dcdff00;
+                    }
+                    .p-accordion-header {
+                        padding: 0px;
+                        margin-top: 0px;
+                        a {
+                            border-radius: 0px;
+                        }
+                    }
+                    .p-accordion-content{
+                        border: 0px;
+                        padding: 0px;
+                        margin: 0px;
+                        p {
+                            margin: 0px;
+                            padding: 1em;
+                            background: $prim-color;
+                            color: $sec-color;
+                            text-align: justify;
+                        }
+                        button {
+                            all: unset;
+                            background: $prim-color;
+                            color: $sec-color;
+                            width: 100%;
+                        }
+                        button:hover {
+                            background: $sec-color;
+                            color: $prim-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .content {
+        width: calc(90vw);
+        .scroll {
+            height: calc(100vh - 3em - 10px);
+            .lesson {
+                padding: 1vw;
+                padding-bottom: 10vh;
+                h1 {
+                    margin-bottom: 1.5em;
+                }
+                .lesson-content {
+                    text-align: justify;
+                }
+                button {
+                    margin: 1em;
+                }
+            }
+            .test {
+                padding: 1vw;
+                padding-bottom: 10vh;
+                .questions {
+                    
+                }
+            }
+        }
+    }
+}

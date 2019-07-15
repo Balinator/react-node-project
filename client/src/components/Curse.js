@@ -5,6 +5,7 @@ import Test from './Test';
 import { Route } from "react-router-dom";
 import { ScrollPanel } from 'primereact/scrollpanel';
 import TestResult from './TestResult';
+import fetchFromHost from '../FetchFromServer';
 
 class Curse extends Component {
 
@@ -15,9 +16,10 @@ class Curse extends Component {
    * 
    */
   componentDidMount() {
-    fetch("http://localhost:3000/api/data")
+    fetchFromHost("/api/data")
       .then(async res => {
         let json = await res.json();
+        console.log(json);
         let id = Number.parseInt(this.props.id);
         let curse = json.find(e => e.id === id);
         this.setState({ data: curse });

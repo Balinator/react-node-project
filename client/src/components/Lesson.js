@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button } from 'primereact/button';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import fetchFromHost from '../FetchFromServer';
 
 class Lesson extends Component {
 
@@ -21,7 +22,7 @@ class Lesson extends Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:3000/api/data")
+        fetchFromHost("/api/data")
             .then(async res => {
                 let data = await res.json();
                 let curseId = Number.parseInt(this.props.curseId);

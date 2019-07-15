@@ -3,6 +3,8 @@ import CurseSmall from './CurseSmall';
 import '../css/style.scss';
 import {Accordion,AccordionTab} from 'primereact/accordion';
 
+import fetchFromHost from '../FetchFromServer';
+
 class Curses extends Component {
   constructor() {
     super();
@@ -26,7 +28,7 @@ class Curses extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:3000/api/data")
+    fetchFromHost("/api/data")
       .then(async res => {
         let json = await res.json();
         let list = [];

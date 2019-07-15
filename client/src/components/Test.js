@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button } from 'primereact/button';
 import { Redirect } from 'react-router-dom';
-import { ScrollPanel } from 'primereact/scrollpanel';
+import fetchFromHost from '../FetchFromServer';
 import QuestionFactory from './questions/QuestionFactory';
 
 class Test extends Component {
@@ -18,7 +18,7 @@ class Test extends Component {
     questionObjects = [];
 
     componentDidMount() {
-        fetch("http://localhost:3000/api/data")
+        fetchFromHost("/api/data")
             .then(async res => {
                 let json = await res.json();
                 let curseId = Number.parseInt(this.props.curseId);

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import data from '../data/data.json';
 import { Button } from 'primereact/button';
 import { Redirect } from 'react-router-dom';
 import { ScrollPanel } from 'primereact/scrollpanel';
@@ -19,12 +18,13 @@ class Test extends Component {
     questionObjects = [];
 
     componentDidMount() {
-        Promise.resolve(data)
-            .then(res => {
+        fetch("http://localhost:3000/api/data")
+            .then(async res => {
+                let json = await res.json();
                 let curseId = Number.parseInt(this.props.curseId);
                 let groupId = Number.parseInt(this.props.groupId);
 
-                let testSource = res.find(c => c.id === curseId)
+                let testSource = json.find(c => c.id === curseId)
                     .lessongroups.find(g => g.id === groupId);
 
                 if (this.props.lessonId) {
@@ -38,54 +38,54 @@ class Test extends Component {
     }
 
     render() {
-        return this.state.data ? (
-            <div className="test">
-                {this.renderRedirect()}
-                <div>
-                    <h1>{this.state.data.title}</h1>
-                    <p>{this.state.data.description}</p>
+            return this.state.data ? (
+                <div className="test">
+                    {this.renderRedirect()}
+                    <div>
+                        <h1>{this.state.data.title}</h1>
+                        <p>{this.state.data.description}</p>
+                    </div>
+                    <form className="questions">
+                        {this.getQuestions()}
+                    </form>
+                    <Button label="Finish testing" onClick={() => this.validate(this.state.values)} />
                 </div>
-                <form className="questions">
-                    {this.getQuestions()}
-                </form>
-                <Button label="Finish testing" onClick={() => this.validate(this.state.values)} />
-            </div>
-        ) : <div />;
-    }
+            ) : <div />;
+        }
 
     /**
      * 
      * @param {*} values 
      */
     validate(values) {
-        let answers = {};
-        if (!values) {
-            console.log('Please anwser all the questions!');
-            return;
-        } else {
-            this.state.data.questions.forEach(question => {
-                if (!values[question.id]) {
-                    console.log(question.id + '. question is not answerd!');
+            let answers = {};
+            if(!values) {
+                console.log('Please anwser all the questions!');
+                return;
+            } else {
+                this.state.data.questions.forEach(question => {
+                    if (!values[question.id]) {
+                        console.log(question.id + '. question is not answerd!');
+                    }
+                });
+            }
+        this.state.data.questions.forEach(question => {
+                if (values[question.id]) {
+                    let val = values[question.id];
+                    answers[question.id] = (val === question.answer);
                 }
             });
+            this.saveTo(answers);
+            this.setRedirect();
         }
-        this.state.data.questions.forEach(question => {
-            if (values[question.id]) {
-                let val = values[question.id];
-                answers[question.id] = (val === question.answer);
-            }
-        });
-        this.saveTo(answers);
-        this.setRedirect();
-    }
 
     setRedirect() {
-        this.setState({
-            redirect: true
-        });
-    }
+            this.setState({
+                redirect: true
+            });
+        }
     renderRedirect() {
-        if (this.state.redirect) {
+            if(this.state.redirect) {
             return <Redirect exact strict to={'/curse/' + this.props.curseId + '/group/' + this.props.groupId + (this.props.lessonId ? '/lesson/' + this.props.lessonId : '') + '/test/result'} />
         }
     }

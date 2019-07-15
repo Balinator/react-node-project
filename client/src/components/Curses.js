@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import data from '../data/data.json';
 import CurseSmall from './CurseSmall';
 import '../css/style.scss';
 import {Accordion,AccordionTab} from 'primereact/accordion';
@@ -27,10 +26,11 @@ class Curses extends Component {
   }
 
   componentDidMount() {
-    Promise.resolve(data)
-      .then(res => {
+    fetch("http://localhost:3000/api/data")
+      .then(async res => {
+        let json = await res.json();
         let list = [];
-        res.forEach(curs => {
+        json.forEach(curs => {
           list.push(<CurseSmall key={curs.id} data={curs} />);
         });
         this.setState({ data: list, activeIndex: 0 });

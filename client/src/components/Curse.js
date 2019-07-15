@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import data from '../data/data.json';
 import Hamburger from './Hamburger';
 import Lesson from './Lesson';
 import Test from './Test';
@@ -16,10 +15,11 @@ class Curse extends Component {
    * 
    */
   componentDidMount() {
-    Promise.resolve(data)
-      .then(res => {
+    fetch("http://localhost:3000/api/data")
+      .then(async res => {
+        let json = await res.json();
         let id = Number.parseInt(this.props.id);
-        let curse = res.find(e => e.id === id);
+        let curse = json.find(e => e.id === id);
         this.setState({ data: curse });
       })
       .catch(e => console.log(e));

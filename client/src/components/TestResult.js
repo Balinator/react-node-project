@@ -1,10 +1,4 @@
 import React, { Component } from "react";
-import data from '../data/data.json';
-import Hamburger from './Hamburger';
-import Lesson from './Lesson';
-import Test from './Test';
-import { Route } from "react-router-dom";
-import { ScrollPanel } from 'primereact/scrollpanel';
 
 class TestResult extends Component {
 

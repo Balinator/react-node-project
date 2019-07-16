@@ -21,16 +21,14 @@
                                 {
                                     "id": 1,
                                     "question": "Is this null?",
-                                    "questionType": "textarea",
-                                    "correct": ["null"],
-                                    "answers":["null"]
+                                    "type": "textarea",
+                                    "answer": "null"
                                 },
                                 {
                                     "id": 2,
                                     "question": "Select one?",
-                                    "questionType": "radio",
-                                    "correct": ["a"],
-                                    "answers":["a"]
+                                    "type": "radio",
+                                    "answer": "a"
                                 }
                             ]
                         }
@@ -46,9 +44,8 @@
                                 {
                                     "id": 3,
                                     "question": "???",
-                                    "questionType": "textarea",
-                                    "correct": ["null"],
-                                    "answers":["null"]
+                                    "type": "textarea",
+                                    "answer": "a"
                                 }
                             ]
                         }
@@ -66,9 +63,8 @@
                         {
                             "id": 4,
                             "question": "???",
-                            "questionType": "textarea",
-                            "correct": ["null"],
-                            "answers":["null"]
+                            "type": "textarea",
+                            "answer": "a"
                         }
                     ]
                 },
@@ -84,9 +80,8 @@
                                 {
                                     "id": 5,
                                     "question": "???",
-                                    "questionType": "textarea",
-                                    "correct": ["null"],
-                                    "answers":["null"]
+                                    "type": "textarea",
+                                    "answer": "a"
                                 }
                             ]
                         }
@@ -102,9 +97,8 @@
                                 {
                                     "id": 6,
                                     "question": "???",
-                                    "questionType": "textarea",
-                                    "correct": ["null"],
-                                    "answers":["null"]
+                                    "type": "textarea",
+                                    "answer": "a"
                                 }
                             ]
                         }
@@ -136,9 +130,8 @@
                                 {
                                     "id": 7,
                                     "question": "???",
-                                    "questionType": "textarea",
-                                    "correct": ["null"],
-                                    "answers":["null"]
+                                    "type": "textarea",
+                                    "answer": "a"
                                 }
                             ]
                         }
@@ -154,9 +147,8 @@
                                 {
                                     "id": 8,
                                     "question": "???",
-                                    "questionType": "textarea",
-                                    "correct": ["null"],
-                                    "answers":["null"]
+                                    "type": "textarea",
+                                    "answer": "a"
                                 }
                             ]
                         }
@@ -174,16 +166,14 @@
                         {
                             "id": 9,
                             "question": "Is this null?",
-                            "questionType": "textarea",
-                            "correct": ["null"],
-                            "answers":["null"]
+                            "type": "textarea",
+                            "answer": "null"
                         },
                         {
                             "id": 10,
                             "question": "Select one?",
-                            "questionType": "radio",
-                            "correct": ["null"],
-                            "answers":["null"]
+                            "type": "radio",
+                            "answer": "a"
                         }
                     ]
                 },
@@ -199,9 +189,8 @@
                                 {
                                     "id": 11,
                                     "question": "???",
-                                    "questionType": "textarea",
-                                    "correct": ["null"],
-                                    "answers":["null"]
+                                    "type": "textarea",
+                                    "answer": "a"
                                 }
                             ]
                         }
@@ -217,9 +206,8 @@
                                 {
                                     "id": 12,
                                     "question": "???",
-                                    "questionType": "textarea",
-                                    "correct": ["null"],
-                                    "answers":["null"]
+                                    "type": "textarea",
+                                    "answer": "a"
                                 }
                             ]
                         }

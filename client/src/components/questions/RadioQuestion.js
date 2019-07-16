@@ -35,8 +35,8 @@ class RadioQuestion extends Question {
             let id = 'radio' + key;
             buttons.push(
                 <div key={++key}>
-                    <RadioButton inputId={id} name={a.answer} onChange={() => this.handleChange(a.answer)} checked={this.state.value === a.answer} />
-                    <label htmlFor={id}>{a.answer}</label>
+                    <RadioButton inputId={id} name={a} onChange={() => this.handleChange(a)} checked={this.state.value === a} />
+                    <label htmlFor={id}>{a}</label>
                 </div>
             );
         });

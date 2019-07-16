@@ -15,7 +15,7 @@ class CurseSmall extends Component {
   }
   renderRedirect = () => {
     if (this.state.redirect) {
-      return <Redirect to={'/curse/' + this.props.data.id} />
+      return <Redirect to={'/curse/' + this.props.data._id} />
     }
   }
 

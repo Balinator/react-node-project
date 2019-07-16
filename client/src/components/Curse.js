@@ -19,9 +19,8 @@ class Curse extends Component {
     fetchFromHost("/api/data")
       .then(async res => {
         let json = await res.json();
-        console.log(json);
-        let id = Number.parseInt(this.props.id);
-        let curse = json.find(e => e.id === id);
+        let id = this.props.id;
+        let curse = json.find(e => e._id === id);
         this.setState({ data: curse });
       })
       .catch(e => console.log(e));

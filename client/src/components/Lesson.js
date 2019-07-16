@@ -25,13 +25,13 @@ class Lesson extends Component {
         fetchFromHost("/api/data")
             .then(async res => {
                 let data = await res.json();
-                let curseId = Number.parseInt(this.props.curseId);
-                let groupId = Number.parseInt(this.props.groupId);
-                let lessonId = Number.parseInt(this.props.lessonId);
+                let curseId = this.props.curseId;
+                let groupId = this.props.groupId;
+                let lessonId = this.props.lessonId;
 
-                let lesson = data.find(e => e.id === curseId)
-                    .lessongroups.find(g => g.id === groupId)
-                    .lessons.find(l => l.id === lessonId);
+                let lesson = data.find(e => e._id === curseId)
+                    .lessongroups.find(g => g._id === groupId)
+                    .lessons.find(l => l._id === lessonId);
                 this.setState({ data: lesson, redirect: false });
             })
             .catch(e => console.log(e));

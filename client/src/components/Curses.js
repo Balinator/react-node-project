@@ -33,7 +33,8 @@ class Curses extends Component {
         let json = await res.json();
         let list = [];
         json.forEach(curs => {
-          list.push(<CurseSmall key={curs.id} data={curs} />);
+          console.log(curs);
+          list.push(<CurseSmall key={curs._id} data={curs} />);
         });
         this.setState({ data: list, activeIndex: 0 });
       })

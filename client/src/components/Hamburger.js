@@ -21,7 +21,8 @@ class Hamburger extends Component {
     }
     renderRedirect() {
         if (this.state.redirect) {
-            return <Redirect exact strict to={'/curse/' + this.props.curseId + '/group/' + this.state.groupId + (this.state.test ? '/test' : '/lesson/' + this.state.lessonId)} />
+            return <Redirect exact strict to={'/curse/' + this.props.curseId + '/group/' + this.state.groupId + (this.state.test ? '/test' : '/lesson/' +
+                this.state.lessonId)} />
         }
     }
 
@@ -47,10 +48,10 @@ class Hamburger extends Component {
                     <AccordionTab key={++key} header={lessonGroup.name}>
                         <p>{lessonGroup.description}</p>
                         <div>
-                            {this.generateLessons(lessonGroup.lessons, lessonGroup.id)}
+                            {this.generateLessons(lessonGroup.lessons, lessonGroup._id)}
                         </div>
-                        {lessonGroup.test !== null ?
-                            <div><Button label={lessonGroup.test.title} onClick={() => this.setRedirect(lessonGroup.id, lessonGroup.id, true)}></Button></div> : <div />
+                        {lessonGroup.test.questions.length > 0 ?
+                            <div><Button label={lessonGroup.test.title} onClick={() => this.setRedirect(lessonGroup._id, lessonGroup._id, true)}></Button></div> : <div />
                         }
                     </AccordionTab>
                 );
@@ -64,7 +65,7 @@ class Hamburger extends Component {
         let key = 0;
         lessons.forEach(lesson => {
             accordionTabs.push(
-                <Button key={++key} label={lesson.title} onClick={() => this.setRedirect(lesson.id, groupId, false)} />
+                <Button key={++key} label={lesson.title} onClick={() => this.setRedirect(lesson._id, groupId, false)} />
             );
         });
         return accordionTabs;

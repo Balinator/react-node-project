@@ -1,14 +1,9 @@
 import React, { Component } from "react";
 import Foundation from 'react-foundation';
-// Add Foundation to index.js
-import './foundation/node_modules/foundation-sites/dist/css/foundation.min.css';
 
-// import components
 import { Button, Colors } from 'react-foundation';
 
 import { Panel } from 'primereact/panel';
-import { Card } from 'primereact/card';
-import { Button } from 'primereact/button';
 import CurseSmall from './CurseSmall';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import fetchFromHost from '../FetchFromServer';
@@ -35,7 +30,7 @@ class Home extends Component {
       <div>
         <h2>Home</h2>
         <div className="button-basics-example">
-        <Button color={Colors.SUCCESS}>Submit</Button>
+          <Button color={Colors.SUCCESS}>Submit</Button>
         </div>
         <div className="content-section introduction">
           <div className="feature-intro">
@@ -73,7 +68,7 @@ class Home extends Component {
           <Accordion activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({ activeIndex: e.index })}>
             <AccordionTab header='Curses'>
               <div className="curses">
-                  { this.state.data }
+                {this.state.data}
               </div>
             </AccordionTab>
           </Accordion>

@@ -3,8 +3,8 @@ import React, { Component } from "react";
 class Contacts extends Component {
   render() {
     return (
-      <div>
-        <h2>Contacts</h2>
+      <div className="cursesPage">
+        <h1>Contacts</h1>
         <p>itt elerhetoek a kontaktok.</p>
       </div>
     );

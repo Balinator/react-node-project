@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import CurseSmall from './CurseSmall';
-import '../css/style.scss';
-import {Accordion,AccordionTab} from 'primereact/accordion';
+import CurseSmall from "./CurseSmall";
+import "../css/style.scss";
+import { Accordion, AccordionTab } from "primereact/accordion";
 
-import fetchFromHost from '../FetchFromServer';
+import fetchFromHost from "../FetchFromServer";
 
 class Curses extends Component {
   constructor() {
@@ -15,14 +15,14 @@ class Curses extends Component {
     return (
       <div className="cursesPage">
         <h1>Curses</h1>
-        <Accordion activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({activeIndex: e.index})}>
-          <AccordionTab header='Curses'>
-            <div className="curses">
-              {this.state.data}
-            </div>
+        <Accordion
+          activeIndex={this.state.activeIndex}
+          onTabChange={e => this.setState({ activeIndex: e.index })}
+        >
+          <AccordionTab header="Curses">
+            <div className="curses">{this.state.data}</div>
           </AccordionTab>
         </Accordion>
-
       </div>
     );
   }

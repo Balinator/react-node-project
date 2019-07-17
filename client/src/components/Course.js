@@ -16,13 +16,12 @@ class Course extends Component {
    * 
    */
   componentDidMount() {
-    fetchFromHost("/api/data")
+    fetchFromHost("/api/course")
       .then(async res => {
         let json = await res.json();
-        console.log(json);
-        let id = Number.parseInt(this.props.id);
-        let course = json.find(e => e.id === id);
-        this.setState({ data: course });
+        let id = this.props.id;
+        let curse = json.find(course => course._id === id);
+        this.setState({ data: curse });
       })
       .catch(e => console.log(e));
   }

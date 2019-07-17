@@ -28,12 +28,12 @@ class Courses extends Component {
   }
 
   componentDidMount() {
-    fetchFromHost("/api/data")
+    fetchFromHost("/api/course")
       .then(async res => {
         let json = await res.json();
         let list = [];
-        json.forEach(curs => {
-          list.push(<CourseSmall key={curs.id} data={curs} />);
+        json.forEach(course => {
+          list.push(<CourseSmall key={course._id} data={course} />);
         });
         this.setState({ data: list, activeIndex: 0 });
       })

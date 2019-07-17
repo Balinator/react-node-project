@@ -32,7 +32,7 @@ class Test extends Component {
             fetchFromHost("/api/course/" + this.props.curseId)
                 .then(async res => {
                     let json = await res.json();
-                    let testSource = json.lessongroups.find(g => g._id === this.props.groupId);
+                    let testSource = json.lessongroups.find(group => group._id === this.props.groupId);
                     fetchFromHost("/api/test/" + testSource.test).then(async test => {
                         this.setState({ data: await test.json() });
                     })

@@ -74,14 +74,14 @@ class Hamburger extends Component {
     }
 
     getTest(testId) {
-        return this.state.tests.find(t => t._id === testId);
+        return this.state.tests.find(test => test._id === testId);
     }
 
     generateLessons(lessons, groupId) {
         let accordionTabs = [];
         let key = 0;
         lessons.forEach(async lessonId => {
-            let lesson = this.state.lessons.find(l => l._id === lessonId);
+            let lesson = this.state.lessons.find(lessonTemp => lessonTemp._id === lessonId);
             if (lesson) {
                 accordionTabs.push(
                     <Button key={++key} label={lesson.title} onClick={() => this.setRedirect(lesson._id, groupId, false)} />

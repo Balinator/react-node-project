@@ -10,6 +10,8 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import '../css/style.scss';
 
+// import Foundation from 'react-foundation';
+
 function App() {
   return (
     <div>
@@ -30,6 +32,8 @@ function App() {
         </div>
       </HashRouter>
     </div>
+
+
   );
 }
 

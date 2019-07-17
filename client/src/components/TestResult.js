@@ -6,7 +6,7 @@ class TestResult extends Component {
     }
 
     getFileName() {
-        let name = this.props.curseId + '-' + this.props.groupId;
+        let name = this.props.courseId + '-' + this.props.groupId;
         if (this.props.lessonId) {
             name += '-' + this.props.lessonId;
         }

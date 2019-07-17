@@ -25,11 +25,10 @@ class Test extends Component {
                 fetchFromHost("/api/test/" + json.test).then(async test => {
                     this.setState({ data: await test.json() });
                 })
-                
             })
             .catch(e => console.log(e));
         } else {
-            fetchFromHost("/api/course/" + this.props.curseId)
+            fetchFromHost("/api/course/" + this.props.courseId)
                 .then(async res => {
                     let json = await res.json();
                     let testSource = json.lessongroups.find(group => group._id === this.props.groupId);
@@ -96,12 +95,12 @@ class Test extends Component {
     }
     renderRedirect() {
         if (this.state.redirect) {
-            return <Redirect exact strict to={'/curse/' + this.props.curseId + '/group/' + this.props.groupId + (this.props.lessonId ? '/lesson/' + this.props.lessonId : '') + '/test/result'} />
+            return <Redirect exact strict to={'/course/' + this.props.courseId + '/group/' + this.props.groupId + (this.props.lessonId ? '/lesson/' + this.props.lessonId : '') + '/test/result'} />
         }
     }
 
     getFileName() {
-        let name = this.props.curseId + '-' + this.props.groupId;
+        let name = this.props.courseId + '-' + this.props.groupId;
         if (this.props.lessonId) {
             name += '-' + this.props.lessonId;
         }

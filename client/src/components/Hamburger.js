@@ -22,7 +22,7 @@ class Hamburger extends Component {
     }
     renderRedirect() {
         if (this.state.redirect) {
-            return <Redirect exact strict to={'/curse/' + this.props.curseId + '/group/' + this.state.groupId + (this.state.test ? '/test' : '/lesson/' +
+            return <Redirect exact strict to={'/course/' + this.props.courseId + '/group/' + this.state.groupId + (this.state.test ? '/test' : '/lesson/' +
                 this.state.lessonId)} />
         }
     }

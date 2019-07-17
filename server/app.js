@@ -6,14 +6,55 @@ import bodyParser from "koa-bodyparser";
 import mount from "koa-mount";
 import Router from "koa-router";
 import HttpStatus from "http-status";
-import { Course } from './model/Course';
+import { Course, Test, Lesson } from './model/Course';
 
 const app = new Koa();
 
 const router = new Router();
 
-router.get("/api/data", async (ctx, next) => {
-  let data = await Course.find();
+router.get("/api/course", async (ctx, next) => {
+  let data = await Course.find({});
+  ctx.status = HttpStatus.OK;
+  console.log(data);
+  ctx.body = data;
+  await next();
+});
+
+router.get("/api/course/:id", async (ctx, next) => {
+  let data = await Course.findOne({_id: ctx.params.id});
+  ctx.status = HttpStatus.OK;
+  console.log('curs id')
+  console.log(data);
+  ctx.body = data;
+  await next();
+});
+
+router.get("/api/lesson", async (ctx, next) => {
+  let data = await Lesson.find();
+  ctx.status = HttpStatus.OK;
+  console.log(data);
+  ctx.body = data;
+  await next();
+});
+
+router.get("/api/lesson/:id", async (ctx, next) => {
+  let data = await Lesson.findOne({_id: ctx.params.id});
+  ctx.status = HttpStatus.OK;
+  console.log(data);
+  ctx.body = data;
+  await next();
+});
+
+router.get("/api/test", async (ctx, next) => {
+  let data = await Test.find();
+  ctx.status = HttpStatus.OK;
+  console.log(data);
+  ctx.body = data;
+  await next();
+});
+
+router.get("/api/test/:id", async (ctx, next) => {
+  let data = await Test.findOne({_id: ctx.params.id});
   ctx.status = HttpStatus.OK;
   console.log(data);
   ctx.body = data;

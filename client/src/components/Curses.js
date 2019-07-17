@@ -28,12 +28,11 @@ class Curses extends Component {
   }
 
   componentDidMount() {
-    fetchFromHost("/api/data")
+    fetchFromHost("/api/course")
       .then(async res => {
         let json = await res.json();
         let list = [];
         json.forEach(curs => {
-          console.log(curs);
           list.push(<CurseSmall key={curs._id} data={curs} />);
         });
         this.setState({ data: list, activeIndex: 0 });

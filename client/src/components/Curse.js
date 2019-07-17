@@ -16,7 +16,7 @@ class Curse extends Component {
    * 
    */
   componentDidMount() {
-    fetchFromHost("/api/data")
+    fetchFromHost("/api/course")
       .then(async res => {
         let json = await res.json();
         let id = this.props.id;

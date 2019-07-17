@@ -81,9 +81,7 @@ class Test extends Component {
         }
         this.state.data.questions.forEach(question => {
             let val = values[question.id];
-            if (Array.isArray(val)) {
-                //TODO: implement
-            } else {
+            if (!Array.isArray(val)) {
                 answers[question.id] = (question.correct.includes(val));
             }
         });

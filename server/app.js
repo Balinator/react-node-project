@@ -6,7 +6,9 @@ import bodyParser from "koa-bodyparser";
 import mount from "koa-mount";
 import Router from "koa-router";
 import HttpStatus from "http-status";
-import { Course, Test, Lesson } from './model/Course';
+import { Course } from './model/Course';
+import { Test } from './model/Test';
+import { Lesson } from './model/Lesson';
 
 const app = new Koa();
 

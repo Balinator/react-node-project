@@ -22,22 +22,17 @@ class Lesson extends Component {
     }
 
     componentDidMount() {
-        fetchFromHost("/api/data")
+        fetchFromHost("/api/lesson/" + this.props.lessonId)
             .then(async res => {
                 let data = await res.json();
-                let courseId = Number.parseInt(this.props.courseId);
-                let groupId = Number.parseInt(this.props.groupId);
-                let lessonId = Number.parseInt(this.props.lessonId);
-
-                let lesson = data.find(e => e.id === courseId)
-                    .lessongroups.find(g => g.id === groupId)
-                    .lessons.find(l => l.id === lessonId);
-                this.setState({ data: lesson, redirect: false });
+                console.log(data)
+                this.setState({ data: data, redirect: false });
             })
             .catch(e => console.log(e));
     }
 
     render() {
+        console.log('s')
         return this.state.data ? (
             <div className="lesson">
                 {this.renderRedirect()}

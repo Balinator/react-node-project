@@ -15,7 +15,7 @@ class CourseSmall extends Component {
   }
   renderRedirect = () => {
     if (this.state.redirect) {
-      return <Redirect to={'/course/' + this.props.data.id} />
+      return <Redirect to={'/course/' + this.props.data._id} />
     }
   }
 

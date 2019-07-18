@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import CurseSmall from "./CurseSmall";
+import CourseSmall from "./CourseSmall";
 import "../css/style.scss";
 import { Accordion, AccordionTab } from "primereact/accordion";
 import { DataTable } from "primereact/datatable";
@@ -40,7 +40,7 @@ class CreateCourse extends Component {
   render() {
     if (this.state)
       return (
-        <div className="cursesPage">
+        <div className="coursesPage">
           <h1>Create a new course</h1>
           <form action="/insert" method="post">
             <table

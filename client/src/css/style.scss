@@ -18,14 +18,14 @@ $box-color: rgb(248, 133, 56);
     }
 }
 
-.cursesPage {
+.coursesPage {
     padding: 1vw;
     h1 {
         padding: 1vw;
     }
     .p-accordion-content {
         padding: 0px !important;
-        .curses {
+        .courses {
             display: grid;
             grid-gap: 1vw;
             grid-template-columns: repeat(4, 1fr);
@@ -59,7 +59,7 @@ $box-color: rgb(248, 133, 56);
     }
 }
 
-.curse {
+.course {
     display: grid;
     grid-template-rows: calc(100vh - 3em);
     grid-template-columns: 10vw 90vw;

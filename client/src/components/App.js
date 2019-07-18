@@ -1,9 +1,9 @@
 import React from "react";
-import Curses from "./Curses";
+import Courses from "./Courses";
 import Home from "./Home";
 import Contact from "./Contact";
-import Curse from "./Curse";
-import CreateCourse from "./CreateCurse";
+import Course from "./Course";
+import CreateCourse from "./CreateCourse";
 import { Route, NavLink, HashRouter } from "react-router-dom";
 
 import "primereact/resources/themes/nova-light/theme.css";
@@ -17,24 +17,24 @@ function App() {
       <HashRouter>
         <nav className="navbar">
           <NavLink to="/">Home</NavLink>
-          <NavLink to="/curses">Curses</NavLink>
-          <NavLink to="/createcurse">Create Course</NavLink>
+          <NavLink to="/courses">Courses</NavLink>
+          <NavLink to="/createcourse">Create Course</NavLink>
           <NavLink to="/contacts">Contact</NavLink>
         </nav>
         <div>
           <Route exact path="/" component={Home} />
-          <Route path="/curses" component={Curses} />
+          <Route path="/courses" component={Courses} />
           <Route path="/contacts" component={Contact} />
-          <Route path="/createcurse" component={CreateCourse} />
           <Route
-            path="/curse/:curseId"
+            path="/course/:courseId"
             component={({ match, location }) => {
               const {
-                params: { curseId }
+                params: { courseId }
               } = match;
-              return <Curse id={curseId} />;
+              return <Course id={courseId} />;
             }}
           />
+          <Route path="/createcourse" component={CreateCourse} />
         </div>
       </HashRouter>
     </div>

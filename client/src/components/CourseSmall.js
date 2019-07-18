@@ -3,7 +3,7 @@ import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { Redirect } from 'react-router-dom'
 
-class CurseSmall extends Component {
+class CourseSmall extends Component {
 
   state = {
     redirect: false
@@ -15,7 +15,7 @@ class CurseSmall extends Component {
   }
   renderRedirect = () => {
     if (this.state.redirect) {
-      return <Redirect to={'/curse/' + this.props.data.id} />
+      return <Redirect to={'/course/' + this.props.data.id} />
     }
   }
 
@@ -31,4 +31,4 @@ class CurseSmall extends Component {
   }
 }
 
-export default CurseSmall;
+export default CourseSmall;

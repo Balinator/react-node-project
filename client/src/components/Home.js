@@ -4,7 +4,7 @@ import Foundation from 'react-foundation';
 import { Button, Colors } from 'react-foundation';
 
 import { Panel } from 'primereact/panel';
-import CurseSmall from './CurseSmall';
+import CurseSmall from './CourseSmall';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import fetchFromHost from '../FetchFromServer';
 

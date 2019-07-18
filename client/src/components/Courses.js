@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import CurseSmall from './CurseSmall';
+import CourseSmall from './CourseSmall';
 import '../css/style.scss';
-import { Accordion, AccordionTab } from 'primereact/accordion';
+import {Accordion,AccordionTab} from 'primereact/accordion';
 
 import fetchFromHost from '../FetchFromServer';
 
-class Curses extends Component {
+class Courses extends Component {
   constructor() {
     super();
     this.state = { data: [], activeIndex: 0 };
@@ -13,11 +13,11 @@ class Curses extends Component {
 
   render() {
     return (
-      <div className="cursesPage">
-        <h1>Curses</h1>
-        <Accordion activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({ activeIndex: e.index })}>
-          <AccordionTab header='Curses'>
-            <div className="curses">
+      <div className="coursesPage">
+        <h1>Courses</h1>
+        <Accordion activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({activeIndex: e.index})}>
+          <AccordionTab header='Courses'>
+            <div className="courses">
               {this.state.data}
             </div>
           </AccordionTab>
@@ -28,13 +28,12 @@ class Curses extends Component {
   }
 
   componentDidMount() {
-    fetchFromHost("/api/data")
+    fetchFromHost("/api/course")
       .then(async res => {
         let json = await res.json();
         let list = [];
-        json.forEach(curs => {
-          console.log(curs);
-          list.push(<CurseSmall key={curs._id} data={curs} />);
+        json.forEach(course => {
+          list.push(<CourseSmall key={course._id} data={course} />);
         });
         this.setState({ data: list, activeIndex: 0 });
       })
@@ -42,4 +41,4 @@ class Curses extends Component {
   }
 }
 
-export default Curses;
+export default Courses;

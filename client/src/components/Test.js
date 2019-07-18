@@ -18,23 +18,26 @@ class Test extends Component {
     questionObjects = [];
 
     componentDidMount() {
-        fetchFromHost("/api/data")
+        if (this.props.lessonId) {
+            fetchFromHost("/api/lesson/" + this.props.lessonId)
             .then(async res => {
                 let json = await res.json();
-                let curseId = this.props.curseId;
-                let groupId = this.props.groupId;
-
-                let testSource = json.find(c => c._id === curseId)
-                    .lessongroups.find(g => g._id === groupId);
-
-                if (this.props.lessonId) {
-                    let lessonId = this.props.lessonId;
-                    testSource = testSource.lessons.find(l => l._id === lessonId);
-                }
-
-                this.setState({ data: testSource.test });
+                fetchFromHost("/api/test/" + json.test).then(async test => {
+                    this.setState({ data: await test.json() });
+                })
             })
             .catch(e => console.log(e));
+        } else {
+            fetchFromHost("/api/course/" + this.props.courseId)
+                .then(async res => {
+                    let json = await res.json();
+                    let testSource = json.lessongroups.find(group => group._id === this.props.groupId);
+                    fetchFromHost("/api/test/" + testSource.test).then(async test => {
+                        this.setState({ data: await test.json() });
+                    })
+                })
+                .catch(e => console.log(e));
+        }
     }
 
     render() {
@@ -59,32 +62,27 @@ class Test extends Component {
      */
     validate(values) {
         let answers = {};
-        console.log(values);
-        console.log(this.state.data.questions);
         if (!values) {
             console.log('Please anwser all the questions!');
             return;
         } else {
             let validate = true;
             this.state.data.questions.forEach(question => {
-                console.log(values[question.id])
                 if (!values[question.id]) {
                     console.log(question.id + '. question is not answerd!');
                     validate = false;
                     return;
                 }
             });
-            if(!validate){
+            if (!validate) {
                 return;
             }
         }
         this.state.data.questions.forEach(question => {
-                let val = values[question.id];
-                if(Array.isArray(val)){
-                    //TODO: implement
-                }else {
-                    answers[question.id] = (question.correct.includes(val));
-                }
+            let val = values[question.id];
+            if (!Array.isArray(val)) {
+                answers[question.id] = (question.correct.includes(val));
+            }
         });
         this.saveTo(answers);
         this.setRedirect();
@@ -97,12 +95,12 @@ class Test extends Component {
     }
     renderRedirect() {
         if (this.state.redirect) {
-            return <Redirect exact strict to={'/curse/' + this.props.curseId + '/group/' + this.props.groupId + (this.props.lessonId ? '/lesson/' + this.props.lessonId : '') + '/test/result'} />
+            return <Redirect exact strict to={'/course/' + this.props.courseId + '/group/' + this.props.groupId + (this.props.lessonId ? '/lesson/' + this.props.lessonId : '') + '/test/result'} />
         }
     }
 
     getFileName() {
-        let name = this.props.curseId + '-' + this.props.groupId;
+        let name = this.props.courseId + '-' + this.props.groupId;
         if (this.props.lessonId) {
             name += '-' + this.props.lessonId;
         }
@@ -131,7 +129,6 @@ class Test extends Component {
     getQuestions() {
         let questions = [];
         let key = 0;
-        console.log(this.state.data.questions)
         this.state.data.questions.forEach(question => {
             let questionObject = QuestionFactory.create(question, this.handleValueChange);
             this.questionObjects.push(questionObject);

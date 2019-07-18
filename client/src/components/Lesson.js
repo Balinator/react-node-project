@@ -17,27 +17,22 @@ class Lesson extends Component {
 
     renderRedirect() {
         if (this.state.redirect) {
-            return <Redirect to={'/curse/' + this.props.curseId + '/group/' + this.props.groupId + '/lesson/' + this.props.lessonId + '/test'} />
+            return <Redirect to={'/course/' + this.props.courseId + '/group/' + this.props.groupId + '/lesson/' + this.props.lessonId + '/test'} />
         }
     }
 
     componentDidMount() {
-        fetchFromHost("/api/data")
+        fetchFromHost("/api/lesson/" + this.props.lessonId)
             .then(async res => {
                 let data = await res.json();
-                let curseId = this.props.curseId;
-                let groupId = this.props.groupId;
-                let lessonId = this.props.lessonId;
-
-                let lesson = data.find(e => e._id === curseId)
-                    .lessongroups.find(g => g._id === groupId)
-                    .lessons.find(l => l._id === lessonId);
-                this.setState({ data: lesson, redirect: false });
+                console.log(data)
+                this.setState({ data: data, redirect: false });
             })
             .catch(e => console.log(e));
     }
 
     render() {
+        console.log('s')
         return this.state.data ? (
             <div className="lesson">
                 {this.renderRedirect()}

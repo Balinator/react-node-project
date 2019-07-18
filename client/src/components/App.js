@@ -9,6 +9,8 @@ import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import '../css/style.scss';
+import './../../node_modules/foundation-sites/dist/css/foundation.min.css';
+
 
 function App() {
   return (

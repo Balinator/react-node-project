@@ -1,6 +1,8 @@
+
 $prim-color: #333333;
 $sec-color: #dddddd;
 $box-color: rgb(248, 133, 56);
+
 
 .navbar {
     background: $prim-color;
@@ -66,6 +68,7 @@ $box-color: rgb(248, 133, 56);
     .hamburger {
         background: #333333;
         width: calc(10vw);
+        float:left;
         .scroll {
             height: 100%;
             .p-accordion {

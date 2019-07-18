@@ -25,13 +25,12 @@ class Home extends Component {
         <Button label="Continue" icon="pi pi-times" />
       </span>
     );
-    return (
 
+
+    return (
       <div>
         <h2>Home</h2>
-        <div className="button-basics-example">
-          <Button color={Colors.SUCCESS}>Submit</Button>
-        </div>
+
         <div className="content-section introduction">
           <div className="feature-intro">
             <h1>The mastery of E-learning</h1>
@@ -61,6 +60,7 @@ class Home extends Component {
                         </p>
           </Panel>
         </div>
+
         <div>
           <h2>Trendy Courses</h2>
         </div>

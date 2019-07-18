@@ -32,8 +32,6 @@ function App() {
         </div>
       </HashRouter>
     </div>
-
-
   );
 }
 

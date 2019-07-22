@@ -4,6 +4,7 @@ import Home from "./Home";
 import Contact from "./Contact";
 import Course from "./Course";
 import CreateCourse from "./CreateCourse";
+import UpdateCourse from "./UpdateCourse";
 import { Route, NavLink, HashRouter } from "react-router-dom";
 
 import "primereact/resources/themes/nova-light/theme.css";
@@ -35,6 +36,15 @@ function App() {
             }}
           />
           <Route path="/createcourse" component={CreateCourse} />
+          <Route
+            path="/updatecourse/:courseId"
+            component={({ match, location }) => {
+              const {
+                params: { courseId }
+              } = match;
+              return <UpdateCourse id={courseId} />;
+            }}
+          />
         </div>
       </HashRouter>
     </div>

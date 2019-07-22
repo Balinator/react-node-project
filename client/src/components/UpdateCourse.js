@@ -4,9 +4,15 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import fetchFromHost from "../FetchFromServer";
 
-class CreateCourse extends Component {
+class UpdateCourse extends Component {
   componentDidMount() {
-    this.setState({ groups: [] });
+    fetchFromHost("/api/course/" + this.props.id).then(async res => {
+      let course = await res.json();
+      console.log(course);
+      // document.getElementById("cname").value = course.name;
+      this.setState({ groups: course.lessongroups, course: course });
+    });
+    // this.setState({ groups: [] });
   }
 
   addGroup() {
@@ -27,26 +33,38 @@ class CreateCourse extends Component {
     }
   }
 
-  createCourse() {
-    fetchFromHost("/api/course", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name: document.getElementById("cname").value,
-        description: document.getElementById("ctextarea").value,
-        lessongroups: this.state.groups
-      })
-    });
+  updateGroup() {
+    if (
+      document.getElementById("gid").value &&
+      document.getElementById("gid").value > 0 &&
+      document.getElementById("gid").value === this.state.groups._id
+    ) {
+      this.state.groups.group = {
+        name: document.getElementById("gname").value,
+        description: document.getElementById("gtextarea").value
+      };
+      this.setState({ asd: "" });
+      document.getElementById("gname").value = "";
+      document.getElementById("gtextarea").value = "";
+    }
+  }
+
+  deleteGroup() {
+    if (document.getElementById("gid").value === this.state.groups._id) {
+      delete this.state.groups[document.getElementById("gid").value];
+    }
+  }
+
+  updateCourse() {
+    if (document.getElementById("cid").value === this.state.courses._id) {
+    }
   }
 
   render() {
     if (this.state)
       return (
         <div className="coursesPage">
-          <h1>Create a new course</h1>
+          <h1>Update a course</h1>
           <form action="/courses" method="get">
             {/* <table
               border="3px"
@@ -57,6 +75,7 @@ class CreateCourse extends Component {
             > */}
             <h3>Course name:</h3>
             <input
+              defaultValue={this.state.course.name}
               type="text"
               id="cname"
               name="cname"
@@ -66,6 +85,7 @@ class CreateCourse extends Component {
             <br />
             <h3>Course description:</h3>
             <textarea
+              defaultValue={this.state.course.description}
               id="ctextarea"
               rows="8"
               cols="70"
@@ -79,7 +99,6 @@ class CreateCourse extends Component {
               {/* <table border="2px"> */}
               <p>Group name:</p>
               <input
-                ref={this.myRef1}
                 id="gname"
                 type="text"
                 name="gname"
@@ -88,7 +107,6 @@ class CreateCourse extends Component {
               <p>Group description:</p>
               <textarea
                 id="gtextarea"
-                ref={this.myRef2}
                 rows="8"
                 cols="70"
                 name="gdescription"
@@ -101,6 +119,28 @@ class CreateCourse extends Component {
                 onClick={() => this.addGroup()}
                 name="gcreate"
                 value="Add Group"
+                style={{
+                  height: "30px",
+                  width: "100px"
+                }}
+              />
+              &nbsp;&nbsp;
+              <input
+                type="button"
+                onClick={() => this.updateGroup()}
+                name="gupdate"
+                value="Update Group"
+                style={{
+                  height: "30px",
+                  width: "100px"
+                }}
+              />
+              &nbsp;&nbsp;
+              <input
+                type="button"
+                onClick={() => this.deleteGroup()}
+                name="gdelete"
+                value="Delete Group"
                 style={{
                   height: "30px",
                   width: "100px"
@@ -119,12 +159,9 @@ class CreateCourse extends Component {
             <br />
             <input
               type="button"
-              onClick={() => {
-                this.createCourse();
-                window.location.href = "/#/courses";
-              }}
-              name="ccreate"
-              value="Create"
+              onClick={() => this.updateCourse()}
+              name="cupdate"
+              value="Update"
               style={{
                 height: "30px",
                 width: "100px"
@@ -134,8 +171,8 @@ class CreateCourse extends Component {
           </form>
         </div>
       );
-    return <div />;
+    return <div>asd </div>;
   }
 }
 
-export default CreateCourse;
+export default UpdateCourse;

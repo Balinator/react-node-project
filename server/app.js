@@ -13,11 +13,17 @@ const app = new Koa();
 const router = new Router();
 
 router.get("/api/data", async (ctx, next) => {
-  let rawdata = fs.readFileSync(__dirname + '/data/data.json');  
-  let data = JSON.parse(rawdata); 
+  let rawdata = fs.readFileSync(__dirname + '/data/data.json');
+  let data = JSON.parse(rawdata);
   ctx.status = HttpStatus.OK;
   console.log(data);
   ctx.body = data;
+  await next();
+});
+
+router.post('/api/course/:coursId/homepage', async (ctx, next) => {
+  ctx.status = HttpStatus.CREATED;
+  console.log(data);
   await next();
 });
 

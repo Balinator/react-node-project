@@ -1,30 +1,17 @@
 import React, { Component } from "react";
 import { Panel } from 'primereact/panel';
-import { Card } from 'primereact/card';
-import { Button } from 'primereact/button';
 import CurseSmall from './CurseSmall';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import fetchFromHost from '../FetchFromServer';
 
 class Home extends Component {
-  i = 1;
   constructor() {
     super();
     this.state = { data: [], activeIndex: 0 };
   }
 
   render() {
-    const header = (
-      <img alt="Card" src='https://cdn0.tnwcdn.com/wp-content/blogs.dir/1/files/2018/05/Wyvern-programming-languages-in-one.jpg' height="150" width="80" />
-    );
-    const footer = (
-      <span>
-        <Button label="Start" icon="pi pi-check" />
-        <Button label="Continue" icon="pi pi-times" />
-      </span>
-    );
     return (
-
       <div>
         <div className="content-section introduction">
           <div className="feature-intro">

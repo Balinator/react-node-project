@@ -6,6 +6,7 @@ import { Route } from "react-router-dom";
 import { ScrollPanel } from 'primereact/scrollpanel';
 import TestResult from './TestResult';
 import fetchFromHost from '../FetchFromServer';
+import CourseHome from './CourseHome';
 
 class Curse extends Component {
 
@@ -29,36 +30,36 @@ class Curse extends Component {
 
   render() {
     return this.state.data ? (
-      <div id="Markdown">
-        asdas
-
-      <div className="curse" id = "Bar">
-          <Hamburger data={this.state.data.lessongroups} curseId={this.props.id} />
-          <div className="content">
-            <ScrollPanel className="scroll">
-              <Route exact path="/curse/:curseId/group/:groupId/lesson/:lessonId" component={({ match, location }) => {
-                const { params: { curseId, groupId, lessonId } } = match;
-                return (<Lesson curseId={curseId} groupId={groupId} lessonId={lessonId} />);
-              }} />
-              <Route exact path="/curse/:curseId/group/:groupId/test" component={({ match, location }) => {
-                const { params: { curseId, groupId } } = match;
-                return (<Test curseId={curseId} groupId={groupId} />);
-              }} />
-              <Route exact path="/curse/:curseId/group/:groupId/lesson/:lessonId/test" component={({ match, location }) => {
-                const { params: { curseId, groupId, lessonId } } = match;
-                return (<Test curseId={curseId} groupId={groupId} lessonId={lessonId} />);
-              }} />
-              <Route exact path="/curse/:curseId/group/:groupId/lesson/:lessonId/test/result" component={({ match, location }) => {
-                const { params: { curseId, groupId, lessonId } } = match;
-                return (<TestResult curseId={curseId} groupId={groupId} lessonId={lessonId} />);
-              }} />
-              <Route exact path="/curse/:curseId/group/:groupId/test/result" component={({ match, location }) => {
-                const { params: { curseId, groupId } } = match;
-                return (<TestResult curseId={curseId} groupId={groupId} />);
-              }} />
-            </ScrollPanel>
-          </div>
-        </div>
+      <div className="curse" id="Bar">
+        <Hamburger data={this.state.data.lessongroups} curseId={this.props.id} />
+        <div className="content">
+          <ScrollPanel className="scroll">
+            <Route exact path="/curse/:curseId/group/:groupId/lesson/:lessonId" component={({ match, location }) => {
+              const { params: { curseId, groupId, lessonId } } = match;
+              return (<Lesson curseId={curseId} groupId={groupId} lessonId={lessonId} />);
+            }} />
+            <Route exact path="/curse/:curseId/group/:groupId/test" component={({ match, location }) => {
+              const { params: { curseId, groupId } } = match;
+              return (<Test curseId={curseId} groupId={groupId} />);
+            }} />
+            <Route exact path="/curse/:curseId/group/:groupId/lesson/:lessonId/test" component={({ match, location }) => {
+              const { params: { curseId, groupId, lessonId } } = match;
+              return (<Test curseId={curseId} groupId={groupId} lessonId={lessonId} />);
+            }} />
+            <Route exact path="/curse/:curseId/group/:groupId/lesson/:lessonId/test/result" component={({ match, location }) => {
+              const { params: { curseId, groupId, lessonId } } = match;
+              return (<TestResult curseId={curseId} groupId={groupId} lessonId={lessonId} />);
+            }} />
+            <Route exact path="/curse/:curseId/group/:groupId/test/result" component={({ match, location }) => {
+              const { params: { curseId, groupId } } = match;
+              return (<TestResult curseId={curseId} groupId={groupId} />);
+            }} />
+            <Route exact path="/curse/:curseId" component={({ match, location }) => {
+              const { params: { curseId } } = match;
+              return (<CourseHome curseId={curseId}/>);
+            }} />
+          </ScrollPanel>
+      </div>
       </div>
     ) : <div />;
   }

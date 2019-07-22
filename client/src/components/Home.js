@@ -1,6 +1,10 @@
 import React, { Component } from "react";
+import Foundation from 'react-foundation';
+
+import { Button, Colors } from 'react-foundation';
+
 import { Panel } from 'primereact/panel';
-import CurseSmall from './CurseSmall';
+import CurseSmall from './CourseSmall';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import fetchFromHost from '../FetchFromServer';
 
@@ -11,8 +15,21 @@ class Home extends Component {
   }
 
   render() {
+    const header = (
+      <img alt="Card" src='https://cdn0.tnwcdn.com/wp-content/blogs.dir/1/files/2018/05/Wyvern-programming-languages-in-one.jpg' height="150" width="80" />
+    );
+    const footer = (
+      <span>
+        <Button label="Start" icon="pi pi-check" />
+        <Button label="Continue" icon="pi pi-times" />
+      </span>
+    );
+
+
     return (
       <div>
+        <h2>Home</h2>
+
         <div className="content-section introduction">
           <div className="feature-intro">
             <h1>The mastery of E-learning</h1>
@@ -42,6 +59,7 @@ class Home extends Component {
                         </p>
           </Panel>
         </div>
+
         <div>
           <h2>Trendy Courses</h2>
         </div>
@@ -49,7 +67,7 @@ class Home extends Component {
           <Accordion activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({ activeIndex: e.index })}>
             <AccordionTab header='Curses'>
               <div className="curses">
-                  { this.state.data }
+                {this.state.data}
               </div>
             </AccordionTab>
           </Accordion>

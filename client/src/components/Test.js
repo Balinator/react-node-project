@@ -18,80 +18,89 @@ class Test extends Component {
     questionObjects = [];
 
     componentDidMount() {
-        fetchFromHost("/api/data")
+        if (this.props.lessonId) {
+            fetchFromHost("/api/lesson/" + this.props.lessonId)
             .then(async res => {
                 let json = await res.json();
-                let curseId = Number.parseInt(this.props.curseId);
-                let groupId = Number.parseInt(this.props.groupId);
-
-                let testSource = json.find(c => c.id === curseId)
-                    .lessongroups.find(g => g.id === groupId);
-
-                if (this.props.lessonId) {
-                    let lessonId = Number.parseInt(this.props.lessonId);
-                    testSource = testSource.lessons.find(l => l.id === lessonId);
-                }
-
-                this.setState({ data: testSource.test });
+                fetchFromHost("/api/test/" + json.test).then(async test => {
+                    this.setState({ data: await test.json() });
+                })
             })
             .catch(e => console.log(e));
+        } else {
+            fetchFromHost("/api/course/" + this.props.courseId)
+                .then(async res => {
+                    let json = await res.json();
+                    let testSource = json.lessongroups.find(group => group._id === this.props.groupId);
+                    fetchFromHost("/api/test/" + testSource.test).then(async test => {
+                        this.setState({ data: await test.json() });
+                    })
+                })
+                .catch(e => console.log(e));
+        }
     }
 
     render() {
-            return this.state.data ? (
-                <div className="test">
-                    {this.renderRedirect()}
-                    <div>
-                        <h1>{this.state.data.title}</h1>
-                        <p>{this.state.data.description}</p>
-                    </div>
-                    <form className="questions">
-                        {this.getQuestions()}
-                    </form>
-                    <Button label="Finish testing" onClick={() => this.validate(this.state.values)} />
+        return this.state.data ? (
+            <div className="test">
+                {this.renderRedirect()}
+                <div>
+                    <h1>{this.state.data.title}</h1>
+                    <p>{this.state.data.description}</p>
                 </div>
-            ) : <div />;
-        }
+                <form className="questions">
+                    {this.getQuestions()}
+                </form>
+                <Button label="Finish testing" onClick={() => this.validate(this.state.values)} />
+            </div>
+        ) : <div />;
+    }
 
     /**
      * 
      * @param {*} values 
      */
     validate(values) {
-            let answers = {};
-            if(!values) {
-                console.log('Please anwser all the questions!');
-                return;
-            } else {
-                this.state.data.questions.forEach(question => {
-                    if (!values[question.id]) {
-                        console.log(question.id + '. question is not answerd!');
-                    }
-                });
-            }
-        this.state.data.questions.forEach(question => {
-                if (values[question.id]) {
-                    let val = values[question.id];
-                    answers[question.id] = (val === question.answer);
+        let answers = {};
+        if (!values) {
+            console.log('Please anwser all the questions!');
+            return;
+        } else {
+            let validate = true;
+            this.state.data.questions.forEach(question => {
+                if (!values[question.id]) {
+                    console.log(question.id + '. question is not answerd!');
+                    validate = false;
+                    return;
                 }
             });
-            this.saveTo(answers);
-            this.setRedirect();
+            if (!validate) {
+                return;
+            }
         }
+        this.state.data.questions.forEach(question => {
+            let val = values[question.id];
+            if (!Array.isArray(val)) {
+                answers[question.id] = (question.correct.includes(val));
+            }
+        });
+        this.saveTo(answers);
+        this.setRedirect();
+    }
 
     setRedirect() {
-            this.setState({
-                redirect: true
-            });
-        }
+        this.setState({
+            redirect: true
+        });
+    }
     renderRedirect() {
-            if(this.state.redirect) {
-            return <Redirect exact strict to={'/curse/' + this.props.curseId + '/group/' + this.props.groupId + (this.props.lessonId ? '/lesson/' + this.props.lessonId : '') + '/test/result'} />
+        if (this.state.redirect) {
+            return <Redirect exact strict to={'/course/' + this.props.courseId + '/group/' + this.props.groupId + (this.props.lessonId ? '/lesson/' + this.props.lessonId : '') + '/test/result'} />
         }
     }
 
     getFileName() {
-        let name = this.props.curseId + '-' + this.props.groupId;
+        let name = this.props.courseId + '-' + this.props.groupId;
         if (this.props.lessonId) {
             name += '-' + this.props.lessonId;
         }

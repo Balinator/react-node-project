@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import HideShowTextArea from './HideShowTextArea';
-import {Button} from 'primereact/button';
+import Course from './Course';
 
 class CourseHome extends Component {
 
     render() {
         return (
             <div>
-                <div><HideShowTextArea courseId={1}></HideShowTextArea></div>
+                <div><HideShowTextArea courseId={this.props.courseId}></HideShowTextArea></div>
                 
             </div>
         );

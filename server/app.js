@@ -65,9 +65,20 @@ router.get("/api/test/:id", async (ctx, next) => {
 
 router.post('/api/course/:coursId/homepage', async (ctx, next) => {
   ctx.status = HttpStatus.CREATED;
-  console.log(data);
+  console.log(ctx.request.body);
+  /*let old = await Course.findOne({_id: ctx.params.coursId});
+  old.homepage = ctx.request.body;
+  console.log(old);
+  await old.save();*/
   await next();
 });
+
+router.post("/api/course", async (ctx, next) => {
+  ctx.status = HttpStatus.CREATED;
+  console.log(ctx.request.body);
+  await new Course(ctx.request.body).save();
+  await next();
+  });
 
 const static_pages = new Koa();
 static_pages.use(serve(__dirname + "/../client/build")); //serve the build directory

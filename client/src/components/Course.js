@@ -6,6 +6,7 @@ import { Route } from "react-router-dom";
 import { ScrollPanel } from 'primereact/scrollpanel';
 import TestResult from './TestResult';
 import fetchFromHost from '../FetchFromServer';
+import CourseHome from './CourseHome';
 
 class Course extends Component {
 
@@ -51,6 +52,10 @@ class Course extends Component {
             <Route exact path="/course/:courseId/group/:groupId/test/result" component={({ match, location }) => {
               const { params: { courseId, groupId } } = match;
               return (<TestResult courseId={courseId} groupId={groupId} />);
+            }} />
+            <Route exact path="/course/:courseId" component={({ match, location }) => {
+              const { params: { courseId} } = match;
+              return (<CourseHome courseId={courseId} />);
             }} />
           </ScrollPanel>
         </div>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Markdown from './Markdown';
 import { Button } from 'primereact/button';
-import TextInput from './TextInput';
 import TextOutput from './TextOutput';
 import fetchFromHost from '../FetchFromServer';
 
@@ -22,7 +21,19 @@ class HideShow extends Component {
     if (this.state.showMe == false)
       return <Button onClick={() => this.operation()} label='Edit'></Button>;
     else
-      return <Button onClick={() => this.operation()} label='Finish'></Button>;
+      return <Button onClick={async () => {
+        console.log(this.state.userInput)
+        fetchFromHost('/api/course/' + this.props.courseId + '/homepage', {
+          method: 'POST', // *GET, POST, PUT, DELETE, etc.
+          mode: 'no-cors', // no-cors, cors, *same-origin
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          body: "anyad"
+        }).catch(e=>console.debug(e));
+        this.operation();
+      }} label='Finish'></Button>;
   }
 
   render() {
@@ -32,21 +43,7 @@ class HideShow extends Component {
           this.state.showMe ?
             <div>
 
-              <Markdown fgh={e => {
-                fetchFromHost('/api/course/' + this.props.coursId + '/homepage', {
-                  method: 'POST', // *GET, POST, PUT, DELETE, etc.
-                  mode: 'cors', // no-cors, cors, *same-origin
-                  cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                  credentials: 'same-origin', // include, *same-origin, omit
-                  headers: {
-                      'Content-Type': 'application/json',
-                  },
-                  redirect: 'follow', // manual, *follow, error
-                  referrer: 'no-referrer', // no-referrer, *client
-                  body: JSON.stringify({
-                    data: e
-                  })
-              });
+              <Markdown setData={e => {
                 this.setState({ userInput: e })
               }
               }></Markdown>

@@ -4,6 +4,7 @@ import { Schema, ObjectId } from 'mongoose';
 let courseSchema = new Schema({
     name: String,
     description: String,
+    homepage: String,
     lessongroups: [{
         id: Number,
         name: String,

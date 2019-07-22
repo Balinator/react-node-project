@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import Foundation from 'react-foundation';
-
 import { Button, Colors } from 'react-foundation';
-
 import { Panel } from 'primereact/panel';
 import CurseSmall from './CourseSmall';
 import { Accordion, AccordionTab } from 'primereact/accordion';

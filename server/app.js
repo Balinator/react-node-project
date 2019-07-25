@@ -39,14 +39,14 @@ router.post("/api/course", async (ctx, next) => {
 });
 
 router.put("/api/course/:id", async (ctx, next) => {
-  ctx.status = HttpStatus.UPDATED;
+  ctx.status = HttpStatus.OK;
   console.log(ctx.request.body);
-  await Course.updateOne({ _id: ctx.params.id });
+  await Course.updateOne({ _id: ctx.params.id }, ctx.request.body);
   await next();
 });
 
 router.delete("/api/course/:id", async (ctx, next) => {
-  ctx.status = HttpStatus.DELETED;
+  ctx.status = HttpStatus.NO_CONTENT;
   console.log(ctx.request.body);
   await Course.deleteOne({ _id: ctx.params.id });
   await next();

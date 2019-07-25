@@ -5,16 +5,26 @@ import { Column } from "primereact/column";
 import fetchFromHost from "../FetchFromServer";
 
 class UpdateCourse extends Component {
+  selectedGroup = null;
+
+  /**
+   * initialize a state and loads the courses
+   */
   componentDidMount() {
     fetchFromHost("/api/course/" + this.props.id).then(async res => {
       let course = await res.json();
       console.log(course);
-      // document.getElementById("cname").value = course.name;
-      this.setState({ groups: course.lessongroups, course: course });
+      this.setState({
+        groups: course.lessongroups,
+        course: course,
+        value: []
+      });
     });
-    // this.setState({ groups: [] });
   }
 
+  /**
+   * this function adds groups to the specific course
+   */
   addGroup() {
     if (
       document.getElementById("gname").value &&
@@ -33,31 +43,45 @@ class UpdateCourse extends Component {
     }
   }
 
+  /**
+   * this function updates a specific group in a specific course
+   */
   updateGroup() {
-    if (
-      document.getElementById("gid").value &&
-      document.getElementById("gid").value > 0 &&
-      document.getElementById("gid").value === this.state.groups._id
-    ) {
-      this.state.groups.group = {
-        name: document.getElementById("gname").value,
-        description: document.getElementById("gtextarea").value
-      };
-      this.setState({ asd: "" });
-      document.getElementById("gname").value = "";
-      document.getElementById("gtextarea").value = "";
-    }
+    this.setState(old => {
+      let asd = old.groups.findIndex(g => g._id === this.selectedGroup._id);
+      old.groups[asd].name = document.getElementById("gname").value;
+      old.groups[asd].description = document.getElementById("gtextarea").value;
+      this.selectedGroup = null;
+      return { selectedGroup: null };
+    });
   }
 
+  /**
+   * this function deletes the specific group in a specific course
+   */
   deleteGroup() {
-    if (document.getElementById("gid").value === this.state.groups._id) {
-      delete this.state.groups[document.getElementById("gid").value];
-    }
+    this.setState(old => {
+      old.groups = old.groups.filter(g => g._id !== this.selectedGroup._id);
+      return { selectedGroup: null };
+    });
   }
 
+  /**
+   * this function updates the details for a course
+   */
   updateCourse() {
-    if (document.getElementById("cid").value === this.state.courses._id) {
-    }
+    fetchFromHost("/api/course/" + this.props.id, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: document.getElementById("cname").value,
+        description: document.getElementById("ctextarea").value,
+        lessongroups: this.state.groups
+      })
+    });
   }
 
   render() {
@@ -66,13 +90,6 @@ class UpdateCourse extends Component {
         <div className="coursesPage">
           <h1>Update a course</h1>
           <form action="/courses" method="get">
-            {/* <table
-              border="3px"
-              style={{
-                borderStyle: "solid",
-                padding: "15px"
-              }}
-            > */}
             <h3>Course name:</h3>
             <input
               defaultValue={this.state.course.name}
@@ -96,9 +113,13 @@ class UpdateCourse extends Component {
             <br />
             <div>
               <h3>Groups</h3>
-              {/* <table border="2px"> */}
               <p>Group name:</p>
               <input
+                value={this.selectedGroup ? this.selectedGroup.name : ""}
+                onChange={e => {
+                  this.selectedGroup.name = e.value;
+                  this.setState({ asd: null });
+                }}
                 id="gname"
                 type="text"
                 name="gname"
@@ -106,6 +127,11 @@ class UpdateCourse extends Component {
               />
               <p>Group description:</p>
               <textarea
+                value={this.selectedGroup ? this.selectedGroup.description : ""}
+                onChange={e => {
+                  this.selectedGroup.description = e.value;
+                  this.setState({ asd: null });
+                }}
                 id="gtextarea"
                 rows="8"
                 cols="70"
@@ -114,52 +140,72 @@ class UpdateCourse extends Component {
               />
               <br />
               <br />
-              <input
-                type="button"
-                onClick={() => this.addGroup()}
-                name="gcreate"
-                value="Add Group"
-                style={{
-                  height: "30px",
-                  width: "100px"
-                }}
-              />
-              &nbsp;&nbsp;
-              <input
-                type="button"
-                onClick={() => this.updateGroup()}
-                name="gupdate"
-                value="Update Group"
-                style={{
-                  height: "30px",
-                  width: "100px"
-                }}
-              />
-              &nbsp;&nbsp;
-              <input
-                type="button"
-                onClick={() => this.deleteGroup()}
-                name="gdelete"
-                value="Delete Group"
-                style={{
-                  height: "30px",
-                  width: "100px"
-                }}
-              />
+              {this.selectedGroup ? (
+                <>
+                  <input
+                    type="button"
+                    onClick={() => this.updateGroup()}
+                    name="gupdate"
+                    value="Update Group"
+                    style={{
+                      height: "30px",
+                      width: "100px"
+                    }}
+                  />
+                  &nbsp;&nbsp;
+                  <input
+                    type="button"
+                    onClick={() => this.deleteGroup()}
+                    name="gdelete"
+                    value="Delete Group"
+                    style={{
+                      height: "30px",
+                      width: "100px"
+                    }}
+                  />
+                </>
+              ) : (
+                <input
+                  type="button"
+                  onClick={() => this.addGroup()}
+                  name="gcreate"
+                  value="Add Group"
+                  style={{
+                    height: "30px",
+                    width: "100px"
+                  }}
+                />
+              )}
               <DataTable
+                id="mytable"
                 value={this.state.groups}
                 style={{
                   width: "580px"
                 }}
+                selectionMode="single"
+                selection={this.selectedGroup}
+                onSelectionChange={e => {
+                  this.selectedGroup =
+                    e.value === this.selectedGroup
+                      ? null
+                      : JSON.parse(JSON.stringify(e.value));
+                  console.log(e.value);
+                  this.setState({ asd: null });
+                }}
               >
                 <Column field="name" header="Groups" />
               </DataTable>
-              {/* </table> */}
             </div>
             <br />
             <input
               type="button"
-              onClick={() => this.updateCourse()}
+              onClick={() => {
+                {
+                  this.updateCourse();
+                  window.location.href = "/#/courses";
+                  window.location.reload();
+                }
+              }}
               name="cupdate"
               value="Update"
               style={{
@@ -167,11 +213,10 @@ class UpdateCourse extends Component {
                 width: "100px"
               }}
             />
-            {/* </table> */}
           </form>
         </div>
       );
-    return <div>asd </div>;
+    return <div>{this.state}</div>;
   }
 }
 

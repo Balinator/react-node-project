@@ -5,10 +5,16 @@ import { Column } from "primereact/column";
 import fetchFromHost from "../FetchFromServer";
 
 class CreateCourse extends Component {
+  /**
+   *
+   */
   componentDidMount() {
     this.setState({ groups: [] });
   }
 
+  /**
+   * this function adds groups to the specific course
+   */
   addGroup() {
     if (
       document.getElementById("gname").value &&
@@ -27,6 +33,9 @@ class CreateCourse extends Component {
     }
   }
 
+  /**
+   * this function creates a course
+   */
   createCourse() {
     fetchFromHost("/api/course", {
       method: "POST",
@@ -120,8 +129,11 @@ class CreateCourse extends Component {
             <input
               type="button"
               onClick={() => {
-                this.createCourse();
-                window.location.href = "/#/courses";
+                {
+                  this.createCourse();
+                  window.location.href = "/#/courses";
+                  window.location.reload();
+                }
               }}
               name="ccreate"
               value="Create"

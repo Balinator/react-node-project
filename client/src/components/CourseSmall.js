@@ -9,6 +9,7 @@ class CourseSmall extends Component {
     redirect: null
   };
   setRedirect = asd => {
+    console.log(asd);
     this.setState({
       redirect: asd
     });
@@ -26,17 +27,12 @@ class CourseSmall extends Component {
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json"
-          }
+          },
+          body: JSON.stringify({ id: this.props.data._id })
         });
         break;
       default:
-        console.log("Hibas redirect");
-    }
-  };
-
-  updateRedirect = () => {
-    if (this.state.redirect1) {
-      return <Redirect to={"/updatecourse/" + this.props.data._id} />;
+        console.log("Hibas redirect - " + this.state.redirect);
     }
   };
 
@@ -60,7 +56,15 @@ class CourseSmall extends Component {
               &nbsp;&nbsp;
               <Button
                 label="Delete"
-                onClick={() => this.setRedirect("delete")}
+                // onClick={function() {
+                //   this.setRedirect("delete");
+                //   //this.setState();
+                // }}
+                onClick={() => {
+                  this.setRedirect("delete");
+
+                  window.location.reload();
+                }}
               />
             </div>
           }
